@@ -2,6 +2,7 @@ package br.usp.esi.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,10 +24,14 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     @PostMapping
     @Transactional
     public ResponseEntity<?> cadastrar(@RequestBody @Valid UserCadastroDto dto, UriComponentsBuilder uriBuilder) {
-        var user = new User(dto);
+        var passwordEncoded = encoder.encode(dto.password());
+        var user = new User(dto, passwordEncoded);
         var userExistis = repository.findByUsername(user.getUsername()) != null;
         
         if (userExistis) {

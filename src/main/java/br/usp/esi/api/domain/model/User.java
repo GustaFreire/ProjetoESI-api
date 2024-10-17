@@ -34,9 +34,9 @@ public class User implements UserDetails{
     private String password;
     private UserRole role;
 
-    public User(UserCadastroDto dto) {
+    public User(UserCadastroDto dto, String passwordEncoded) {
         this.username = dto.username();
-        this.password = dto.password();
+        this.password = passwordEncoded;
         this.role = dto.role();
     }
 
