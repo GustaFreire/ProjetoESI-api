@@ -1,3 +1,3 @@
 package br.usp.esi.api.domain.dto;
 
-public record ExceptionDto(String message) {}
+public record ExceptionDTO(String message) {}

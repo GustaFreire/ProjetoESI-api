@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usp.esi.api.domain.dto.LoginDto;
-import br.usp.esi.api.domain.dto.RegisterDto;
+import br.usp.esi.api.domain.dto.LoginDTO;
+import br.usp.esi.api.domain.dto.RegisterDTO;
+import br.usp.esi.api.domain.dto.TokenDTO;
 import br.usp.esi.api.domain.model.User;
 import br.usp.esi.api.domain.repository.UserRepository;
+import br.usp.esi.api.domain.service.TokenService;
 import br.usp.esi.api.infra.exception.UserAlreadyExistsException;
 import jakarta.validation.Valid;
 
@@ -28,16 +30,20 @@ public class AuthenticationController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginDto dto) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginDTO dto) {
         var user = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
-        authenticationManager.authenticate(user);
-        return ResponseEntity.ok().build();
+        var auth = authenticationManager.authenticate(user);
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new TokenDTO(token));
     }
 
     @PostMapping("/register")
     @Transactional
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterDto dto) {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO dto) {
         if (repository.findByUsername(dto.username()) != null) {
             throw new UserAlreadyExistsException("Ja existe um usuario com o email informado");
         }

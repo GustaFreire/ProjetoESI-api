@@ -4,13 +4,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.usp.esi.api.domain.dto.ExceptionDto;
+import br.usp.esi.api.domain.dto.ExceptionDTO;
 
 @RestControllerAdvice
 public class ErrorHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<?> userAlreadyExistisException(UserAlreadyExistsException ex) {
-        return ResponseEntity.badRequest().body(new ExceptionDto(ex.getMessage()));
+        return ResponseEntity.badRequest().body(new ExceptionDTO(ex.getMessage()));
     }
 }
