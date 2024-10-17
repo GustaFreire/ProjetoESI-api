@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.usp.esi.api.domain.dto.UserCadastroDto;
 import br.usp.esi.api.domain.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,10 +33,10 @@ public class User implements UserDetails{
     private String password;
     private UserRole role;
 
-    public User(UserCadastroDto dto, String passwordEncoded) {
-        this.username = dto.username();
-        this.password = passwordEncoded;
-        this.role = dto.role();
+    public User(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     @Override
@@ -54,9 +53,7 @@ public class User implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<? extends GrantedAuthority> userRoleList;
 
-        if (this.role == UserRole.ADMIN) {
-            userRoleList = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else if (this.role == UserRole.DISCENTE) {
+        if (this.role == UserRole.DISCENTE) {
             userRoleList = List.of(new SimpleGrantedAuthority("ROLE_DISCENTE"));
         } else if (this.role == UserRole.DOSCENTE) {
             userRoleList = List.of(new SimpleGrantedAuthority("ROLE_DOSCENTE"));

@@ -2,7 +2,6 @@ package br.usp.esi.api.domain.enums;
 
 public enum UserRole {
 
-    ADMIN("admin"),
     DISCENTE("discente"),
     DOSCENTE("doscente"),
     CCP("ccp");
