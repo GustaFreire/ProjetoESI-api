@@ -1,6 +1,10 @@
 package br.usp.esi.api.controllers;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +24,7 @@ import br.usp.esi.api.domain.model.User;
 import br.usp.esi.api.domain.repository.AlunoRepository;
 import br.usp.esi.api.domain.repository.UserRepository;
 import br.usp.esi.api.domain.service.TokenService;
+import br.usp.esi.api.domain.util.AlunoDataValidator;
 import br.usp.esi.api.infra.exception.UserAlreadyExistsException;
 import jakarta.validation.Valid;
 
@@ -56,9 +61,14 @@ public class AuthenticationController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
         User user = new User(dto.username(), encryptedPassword, dto.role());
-        userRepository.save(user);
 
         if (user.getRole().equals(UserRole.DISCENTE)) {
+            List<String> erros = AlunoDataValidator.validate(dto);
+            if (erros.size() > 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros);
+            }
+            
+            userRepository.save(user);
             Aluno aluno = new Aluno(dto, user);
             alunoRepository.save(aluno);
         }
