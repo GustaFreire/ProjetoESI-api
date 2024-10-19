@@ -52,9 +52,6 @@ public class Aluno {
     private LocalDate dataMatricula;
     private LocalDate dataAprovacaoExameQualificacao;
     private LocalDate dataAprovacaoExameProficiencia;
-  
-    //private List<String> disciplinasAprovadas;
-    //private List<String> disciplinasReprovadas;
 
     public Aluno(RegisterDTO dto, User user) {
         this.user = user;
@@ -72,7 +69,5 @@ public class Aluno {
         this.dataMatricula = dto.dataMatricula();
         this.dataAprovacaoExameQualificacao = dto.dataAprovacaoExameQualificacao();
         this.dataAprovacaoExameProficiencia = dto.dataAprovacaoExameProficiencia();
-        //this.disciplinasAprovadas = dto.disciplinasAprovadas();
-        //this.disciplinasReprovadas = dto.disciplinasReprovadas();
     }
 }

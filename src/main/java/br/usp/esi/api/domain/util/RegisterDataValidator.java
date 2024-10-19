@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import br.usp.esi.api.domain.dto.RegisterDTO;
 
-public class AlunoDataValidator {
+public class RegisterDataValidator {
 
-    public static List<String> validate(RegisterDTO dto) {
+    public static List<String> validateStudentData(RegisterDTO dto) {
         
         List<String> erros = new ArrayList<>();
 
@@ -57,6 +57,42 @@ public class AlunoDataValidator {
 
         if (dto.dataMatricula() == null) {
             erros.add("Data de matrícula é obrigatória para aluno");
+        }
+
+        if (dto.disciplinasAprovadas() == null) {
+            erros.add("Lista de disciplinas aprovadas é obrigatória para aluno");
+        }
+
+        if (dto.disciplinasReprovadas() == null) {
+            erros.add("Lista de disciplinas reprovadas é obrigatória para aluno");
+        }
+
+        return erros;
+    }
+
+    public static List<String> validateTeacherData(RegisterDTO dto) {
+        List<String> erros = new ArrayList<>();
+
+        if (dto.nomeUsuario() == null) {
+            erros.add("Nome é obrigatório para orientador");
+        }
+
+        if (dto.email() == null) {
+            erros.add("Email é obrigatório para orientador");
+        }
+
+        return erros;
+    }
+
+    public static List<String> validateCcpData(RegisterDTO dto) {
+        List<String> erros = new ArrayList<>();
+
+        if (dto.nomeUsuario() == null) {
+            erros.add("Nome é obrigatório para CCP");
+        }
+
+        if (dto.email() == null) {
+            erros.add("Email é obrigatório para CCP");
         }
 
         return erros;

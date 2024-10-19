@@ -22,7 +22,7 @@ public record RegisterDTO(
     @NotNull(message = "tipo de usuario nao pode ser nulo")
     UserRole role,
     
-    //dados aluno (opcionais)
+    //dados opcionais (aluno, orientador e ccp)
     TipoCurso tipoCurso,
     String nomeUsuario,
 

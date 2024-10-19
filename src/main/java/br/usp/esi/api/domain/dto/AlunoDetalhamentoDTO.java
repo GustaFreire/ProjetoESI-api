@@ -1,5 +1,7 @@
 package br.usp.esi.api.domain.dto;
 
+import java.util.List;
+
 import java.time.LocalDate;
 
 import br.usp.esi.api.domain.enums.TipoCurso;
@@ -21,30 +23,30 @@ public record AlunoDetalhamentoDTO(
     LocalDate dataUltimaAttLattes,
     LocalDate dataMatricula,
     LocalDate dataAprovacaoExameQualificacao,
-    LocalDate dataAprovacaoExameProficiencia
-    //List<String> disciplinasAprovadas,
-    //List<String> disciplinasReprovadas
-    ) {
+    LocalDate dataAprovacaoExameProficiencia,
+    List<String> disciplinasAprovadas,
+    List<String> disciplinasReprovadas) {
 
-    public AlunoDetalhamentoDTO(Aluno aluno) {
+    public AlunoDetalhamentoDTO(Aluno aluno, List<String> disciplinasAprovadas,
+        List<String> disciplinasReprovadas) {
+        
         this(aluno.getId(), 
-            aluno.getUser().getId(), 
-            aluno.getTipoCurso(), 
-            aluno.getNome(), 
-            aluno.getEmail(), 
-            aluno.getNusp(), 
-            aluno.getRg(), 
-            aluno.getNomeOrientador(), 
-            aluno.getLocalNascimento(), 
-            aluno.getNacionalidade(), 
-            aluno.getLinkLattes(), 
-            aluno.getDataNascimento(), 
-            aluno.getDataUltimaAttLattes(), 
-            aluno.getDataMatricula(), 
-            aluno.getDataAprovacaoExameQualificacao(), 
-            aluno.getDataAprovacaoExameProficiencia()
-            //aluno.getDisciplinasAprovadas(), 
-            //aluno.getDisciplinasReprovadas()
-            );
+        aluno.getUser().getId(), 
+        aluno.getTipoCurso(), 
+        aluno.getNome(), 
+        aluno.getEmail(), 
+        aluno.getNusp(), 
+        aluno.getRg(), 
+        aluno.getNomeOrientador(), 
+        aluno.getLocalNascimento(), 
+        aluno.getNacionalidade(), 
+        aluno.getLinkLattes(), 
+        aluno.getDataNascimento(), 
+        aluno.getDataUltimaAttLattes(), 
+        aluno.getDataMatricula(), 
+        aluno.getDataAprovacaoExameQualificacao(), 
+        aluno.getDataAprovacaoExameProficiencia(),
+        disciplinasAprovadas, 
+        disciplinasReprovadas);
     }
 }

@@ -44,8 +44,8 @@ public class ErrorHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionDTO("Credenciais inválidas"));
     }
 
-    @ExceptionHandler(StudentNotFoundException.class)
-    public ResponseEntity<?> trataErroStudentNotFound(StudentNotFoundException ex) {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> trataErroStudentNotFound(UserNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDTO("Erro: " + ex.getMessage()));
     }
 
