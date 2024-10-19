@@ -1,7 +1,6 @@
 package br.usp.esi.api.domain.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import br.usp.esi.api.domain.dto.RegisterDTO;
 import br.usp.esi.api.domain.enums.TipoCurso;
