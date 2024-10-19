@@ -24,8 +24,8 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> tratarErro404() {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> tratarErroEntityNotFoundException(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDTO("Erro: " + ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -42,6 +42,11 @@ public class ErrorHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> tratarErroBadCredentials() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionDTO("Credenciais inválidas"));
+    }
+
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity<?> trataErroStudentNotFound(StudentNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDTO("Erro: " + ex.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)
@@ -61,6 +66,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> tratarErro500(Exception ex) {
+        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionDTO("Erro: " + ex.getLocalizedMessage()));
     }
 

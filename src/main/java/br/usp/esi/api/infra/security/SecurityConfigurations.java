@@ -29,8 +29,9 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                 auth.requestMatchers(HttpMethod.POST, "/auth/register").permitAll();
-                auth.requestMatchers("/discente/**").hasRole("DISCENTE");
-                auth.requestMatchers("/doscente").hasRole("DOSCENTE");
+                //auth.requestMatchers("/**").hasRole("ADMIN");
+                auth.requestMatchers("/aluno/**").hasRole("DISCENTE");
+                auth.requestMatchers("/orientador").hasRole("DOSCENTE");
                 auth.requestMatchers("/ccp").hasRole("CCP");
                 auth.anyRequest().authenticated();
             })

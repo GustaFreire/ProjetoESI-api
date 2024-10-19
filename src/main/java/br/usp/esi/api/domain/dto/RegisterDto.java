@@ -1,5 +1,9 @@
 package br.usp.esi.api.domain.dto;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import br.usp.esi.api.domain.enums.TipoCurso;
 import br.usp.esi.api.domain.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +18,23 @@ public record RegisterDTO(
     String password,
 
     @NotNull
-    UserRole role) {
+    UserRole role,
     
-}
+    //dados aluno (opcionais)
+    TipoCurso tipoCurso,
+    String nomeUsuario,
+    String email,
+    String nusp,
+    String rg,
+    String nomeOrientador,
+    String localNascimento,
+    String nacionalidade,
+    String linkLattes,
+    LocalDate dataNascimento,
+    LocalDate dataUltimaAttLattes,
+    LocalDate dataMatricula,
+    LocalDate dataAprovacaoExameQualificacao,
+    LocalDate dataAprovacaoExameProficiencia
+    //List<String> disciplinasAprovadas,
+    //List<String> disciplinasReprovadas
+    ) {}

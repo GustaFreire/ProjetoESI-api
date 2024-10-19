@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.usp.esi.api.domain.dto.LoginDTO;
 import br.usp.esi.api.domain.dto.RegisterDTO;
 import br.usp.esi.api.domain.dto.TokenDTO;
+import br.usp.esi.api.domain.enums.UserRole;
+import br.usp.esi.api.domain.model.Aluno;
 import br.usp.esi.api.domain.model.User;
+import br.usp.esi.api.domain.repository.AlunoRepository;
 import br.usp.esi.api.domain.repository.UserRepository;
 import br.usp.esi.api.domain.service.TokenService;
 import br.usp.esi.api.infra.exception.UserAlreadyExistsException;
@@ -28,7 +31,10 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @Autowired
     private TokenService tokenService;
@@ -44,13 +50,19 @@ public class AuthenticationController {
     @PostMapping("/register")
     @Transactional
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO dto) {
-        if (repository.findByUsername(dto.username()) != null) {
+        if (userRepository.findByUsername(dto.username()) != null) {
             throw new UserAlreadyExistsException("Ja existe um usuario com o email informado");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
         User user = new User(dto.username(), encryptedPassword, dto.role());
-        repository.save(user);
+        userRepository.save(user);
+
+        if (user.getRole().equals(UserRole.DISCENTE)) {
+            Aluno aluno = new Aluno(dto, user);
+            alunoRepository.save(aluno);
+        }
+
         return ResponseEntity.ok().build();
     }
 }

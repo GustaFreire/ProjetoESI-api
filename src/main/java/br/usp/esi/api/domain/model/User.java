@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import br.usp.esi.api.domain.enums.UserRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,12 +33,16 @@ public class User implements UserDetails{
     private Long id;
     private String username;
     private String password;
+    private Boolean ativo;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public User(String username, String password, UserRole role) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.ativo = true;
     }
 
     @Override
@@ -53,7 +59,10 @@ public class User implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<? extends GrantedAuthority> userRoleList;
 
-        if (this.role == UserRole.DISCENTE) {
+        if (this.role == UserRole.ADMIN) {
+            userRoleList = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        else if (this.role == UserRole.DISCENTE) {
             userRoleList = List.of(new SimpleGrantedAuthority("ROLE_DISCENTE"));
         } else if (this.role == UserRole.DOSCENTE) {
             userRoleList = List.of(new SimpleGrantedAuthority("ROLE_DOSCENTE"));

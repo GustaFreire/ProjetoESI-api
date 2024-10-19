@@ -4,6 +4,7 @@ CREATE TABLE usuarios(
     username VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(10) NOT NULL,
+    ativo tinyint,
 
     primary key(id)
 );
