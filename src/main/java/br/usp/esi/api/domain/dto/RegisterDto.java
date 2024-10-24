@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.usp.esi.api.domain.enums.TipoCurso;
 import br.usp.esi.api.domain.enums.UserRole;
 import jakarta.validation.constraints.Email;
@@ -37,11 +39,19 @@ public record RegisterDTO(
     String localNascimento,
     String nacionalidade,
     String linkLattes,
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataNascimento,
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataUltimaAttLattes,
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataMatricula,
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataAprovacaoExameQualificacao,
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataAprovacaoExameProficiencia,
+
     List<String> disciplinasAprovadas,
-    List<String> disciplinasReprovadas
-    ) {}
+    List<String> disciplinasReprovadas) {
+
+}

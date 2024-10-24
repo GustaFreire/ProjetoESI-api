@@ -9,7 +9,7 @@ import br.usp.esi.api.domain.model.Relatorio;
 
 public record ListRelatoriosAlunoDTO(
      
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate dataLimite,
     String nomeRelatorio,
     String nomeAluno,
