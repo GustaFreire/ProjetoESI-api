@@ -21,10 +21,12 @@ import br.usp.esi.api.domain.repository.AlunoRepository;
 import br.usp.esi.api.domain.repository.CcpRepository;
 import br.usp.esi.api.domain.repository.RelatorioRepository;
 import br.usp.esi.api.infra.exception.UserNotFoundException;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/ccp")
+@SecurityRequirement(name = "bearer-key")
 public class CcpController {
 
     @Autowired

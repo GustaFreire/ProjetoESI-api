@@ -37,6 +37,7 @@ import br.usp.esi.api.domain.repository.UserRepository;
 import br.usp.esi.api.domain.service.TokenService;
 import br.usp.esi.api.domain.util.RegisterDataValidator;
 import br.usp.esi.api.infra.exception.UserAlreadyExistsException;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
@@ -133,6 +134,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/users")
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<List<ListUsersDTO>> listar() {
         var users = userRepository.findAll();
         var listaDeUsuarios = new ArrayList<ListUsersDTO>();

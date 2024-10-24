@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.usp.esi.api.domain.dto.OrientadorCcpDetalhamentoDTO;
 import br.usp.esi.api.domain.repository.OrientadorRepository;
 import br.usp.esi.api.infra.exception.UserNotFoundException;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/orientador")
+@SecurityRequirement(name = "bearer-key")
 public class OrientadorController {
 
     @Autowired
