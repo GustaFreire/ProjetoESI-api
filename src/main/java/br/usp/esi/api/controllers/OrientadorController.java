@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usp.esi.api.domain.dto.OrientadorCcpDetalhamentoDto;
+import br.usp.esi.api.domain.dto.OrientadorCcpDetalhamentoDTO;
 import br.usp.esi.api.domain.repository.OrientadorRepository;
 import br.usp.esi.api.infra.exception.UserNotFoundException;
 
@@ -21,6 +21,6 @@ public class OrientadorController {
     @GetMapping("/{id}")
     public ResponseEntity<?> detalhar(@PathVariable Long id) {
         var orientador = orientadorRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Orientador de ID " + id + " não encontrado"));
-        return ResponseEntity.ok(new OrientadorCcpDetalhamentoDto(orientador));
+        return ResponseEntity.ok(new OrientadorCcpDetalhamentoDTO(orientador));
     }
 }

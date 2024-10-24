@@ -1,12 +1,11 @@
 package br.usp.esi.api.controllers;
 
-
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,14 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.usp.esi.api.domain.dto.LoginDTO;
 import br.usp.esi.api.domain.dto.RegisterDTO;
+import br.usp.esi.api.domain.dto.RetornoDTO;
 import br.usp.esi.api.domain.dto.TokenDTO;
-import br.usp.esi.api.domain.dto.UserDtoListagem;
+import br.usp.esi.api.domain.dto.ListRelatoriosAlunoDTO;
+import br.usp.esi.api.domain.dto.ListUsersDTO;
 import br.usp.esi.api.domain.enums.UserRole;
 import br.usp.esi.api.domain.model.Aluno;
 import br.usp.esi.api.domain.model.AlunoDisciplinasAprovadas;
 import br.usp.esi.api.domain.model.AlunoDisciplinasReprovadas;
 import br.usp.esi.api.domain.model.Ccp;
 import br.usp.esi.api.domain.model.Orientador;
+import br.usp.esi.api.domain.model.Relatorio;
 import br.usp.esi.api.domain.model.User;
 import br.usp.esi.api.domain.repository.AlunoDisciplinasAprovadasRepository;
 import br.usp.esi.api.domain.repository.AlunoDisciplinasReprovadasRepository;
@@ -131,12 +133,14 @@ public class AuthenticationController {
             userRepository.save(user);
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(new RetornoDTO("Usuário cadastrado com sucesso!"));
     }
 
     @GetMapping("/users")
-    public ResponseEntity<Page<UserDtoListagem>> listar(@PageableDefault(size = 10, page = 0) Pageable pageable) {
-        var page = userRepository.findAll(pageable).map(UserDtoListagem::new);
-        return ResponseEntity.ok(page);
+    public ResponseEntity<List<ListUsersDTO>> listar() {
+        var users = userRepository.findAll();
+        var listaDeUsuarios = new ArrayList<ListUsersDTO>();
+        for (User user: users) listaDeUsuarios.add(new ListUsersDTO(user));
+        return ResponseEntity.ok(listaDeUsuarios);
     }
 }
