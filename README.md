@@ -17,4 +17,4 @@ Instruções para instalar o projeto:
 
 1. Clone o repositório:
    ```bash
-   git clone (https://github.com/GustaFreire/ProjetoESI-api.git)
+   git clone https://github.com/GustaFreire/ProjetoESI-api.git
