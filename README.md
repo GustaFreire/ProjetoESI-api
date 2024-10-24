@@ -6,10 +6,10 @@ Projeto bacana da disciplina de ESI da EACH USP - Outubro de 2024
 
 - Java 17
 - Spring Boot 3.3.4
-- H2 Database
+- H2 Database (provisório)
 - Maven
 - Postman (testes)
-- VS Code (desenvolvimento) -> Precisa das extensões do Java e do Spring
+- VS Code (desenvolvimento)
 
 ## Instalação
 
