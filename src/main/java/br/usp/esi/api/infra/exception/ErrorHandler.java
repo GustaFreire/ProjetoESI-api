@@ -12,7 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.usp.esi.api.domain.dto.ExceptionDTO;
+import br.usp.esi.api.domain.dto.RetornoDTO;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
@@ -20,12 +20,12 @@ public class ErrorHandler {
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<?> userAlreadyExistisException(UserAlreadyExistsException ex) {
-        return ResponseEntity.badRequest().body(new ExceptionDTO(ex.getMessage()));
+        return ResponseEntity.badRequest().body(new RetornoDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> tratarErroEntityNotFoundException(EntityNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDTO("Erro: " + ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -36,38 +36,38 @@ public class ErrorHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> tratarErro400(HttpMessageNotReadableException ex) {
-        return ResponseEntity.badRequest().body(new ExceptionDTO("Erro: " + ex.getLocalizedMessage()));
+        return ResponseEntity.badRequest().body(new RetornoDTO("Erro: " + ex.getLocalizedMessage()));
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> tratarErroBadCredentials() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionDTO("Credenciais inválidas"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new RetornoDTO("Credenciais inválidas"));
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<?> trataErroStudentNotFound(UserNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionDTO("Erro: " + ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<?> tratarErroAuthentication() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionDTO("Falha na autenticação"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new RetornoDTO("Falha na autenticação"));
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<?> tratarErroAcessoNegado() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ExceptionDTO("Acesso negado"));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new RetornoDTO("Acesso negado"));
     }
 
     @ExceptionHandler(InternalAuthenticationServiceException.class)
     public ResponseEntity<?> tratarErroAuthService() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionDTO("Erro: Email não encontrado na base"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new RetornoDTO("Erro: Email não encontrado na base"));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> tratarErro500(Exception ex) {
         ex.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionDTO("Erro: " + ex.getLocalizedMessage()));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RetornoDTO("Erro: " + ex.getLocalizedMessage()));
     }
 
     private record ErroDto(String campo, String mensagem) {

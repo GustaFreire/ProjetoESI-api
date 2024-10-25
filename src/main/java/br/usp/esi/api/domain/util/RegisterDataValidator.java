@@ -3,11 +3,11 @@ package br.usp.esi.api.domain.util;
 import java.util.List;
 import java.util.ArrayList;
 
-import br.usp.esi.api.domain.dto.RegisterDTO;
+import br.usp.esi.api.domain.dto.SignUpDTO;
 
 public class RegisterDataValidator {
 
-    public static List<String> validateStudentData(RegisterDTO dto) {
+    public static List<String> validateStudentData(SignUpDTO dto) {
         
         List<String> erros = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class RegisterDataValidator {
         return erros;
     }
 
-    public static List<String> validateTeacherData(RegisterDTO dto) {
+    public static List<String> validateTeacherData(SignUpDTO dto) {
         List<String> erros = new ArrayList<>();
 
         if (dto.nomeUsuario() == null) {
@@ -84,7 +84,7 @@ public class RegisterDataValidator {
         return erros;
     }
 
-    public static List<String> validateCcpData(RegisterDTO dto) {
+    public static List<String> validateCcpData(SignUpDTO dto) {
         List<String> erros = new ArrayList<>();
 
         if (dto.nomeUsuario() == null) {

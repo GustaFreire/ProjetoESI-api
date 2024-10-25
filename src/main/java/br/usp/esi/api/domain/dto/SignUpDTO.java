@@ -1,7 +1,6 @@
 package br.usp.esi.api.domain.dto;
 
 import java.time.LocalDate;
-
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record RegisterDTO(
+public record SignUpDTO(
 
     @NotBlank(message = "username nao pode ser nulo") @Email
     String username,

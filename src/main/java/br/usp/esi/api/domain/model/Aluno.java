@@ -2,7 +2,7 @@ package br.usp.esi.api.domain.model;
 
 import java.time.LocalDate;
 
-import br.usp.esi.api.domain.dto.RegisterDTO;
+import br.usp.esi.api.domain.dto.SignUpDTO;
 import br.usp.esi.api.domain.enums.TipoCurso;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -57,7 +57,7 @@ public class Aluno {
     private LocalDate dataAprovacaoExameQualificacao;
     private LocalDate dataAprovacaoExameProficiencia;
 
-    public Aluno(RegisterDTO dto, User user) {
+    public Aluno(SignUpDTO dto, User user) {
         this.user = user;
         this.tipoCurso = dto.tipoCurso();
         this.nome = dto.nomeUsuario();

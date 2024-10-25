@@ -1,7 +1,6 @@
 package br.usp.esi.api.domain.model;
 
-import br.usp.esi.api.domain.dto.RegisterDTO;
-
+import br.usp.esi.api.domain.dto.SignUpDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class Orientador {
     private String nome;
     private String email;
     
-    public Orientador(RegisterDTO dto, User user) {
+    public Orientador(SignUpDTO dto, User user) {
         this.user = user;
         this.nome = dto.nomeUsuario();
         this.email = dto.email();

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usp.esi.api.domain.dto.LoginDTO;
-import br.usp.esi.api.domain.dto.RegisterDTO;
 import br.usp.esi.api.domain.dto.RetornoDTO;
+import br.usp.esi.api.domain.dto.SigInDTO;
+import br.usp.esi.api.domain.dto.SignUpDTO;
 import br.usp.esi.api.domain.dto.TokenDTO;
 import br.usp.esi.api.domain.dto.ListUsersDTO;
 import br.usp.esi.api.domain.enums.UserRole;
@@ -69,7 +69,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginDTO dto) {
+    public ResponseEntity<?> login(@RequestBody @Valid SigInDTO dto) {
         var user = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
         var auth = authenticationManager.authenticate(user);
         var token = tokenService.generateToken((User) auth.getPrincipal());
@@ -78,7 +78,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     @Transactional
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO dto) {
+    public ResponseEntity<?> register(@RequestBody @Valid SignUpDTO dto) {
         if (userRepository.findByUsername(dto.username()) != null) {
             throw new UserAlreadyExistsException("Ja existe um usuario com o email informado");
         }
