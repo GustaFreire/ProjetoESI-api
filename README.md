@@ -5,7 +5,7 @@ Projeto bacana da disciplina de ESI da EACH USP - Outubro de 2024
 ## Tecnologias Utilizadas
 
 - Java 17
-- Spring Boot 3.3.4
+- Spring Boot 3.3.5
 - H2 Database (provisório)
 - Maven
 - Postman (testes)
