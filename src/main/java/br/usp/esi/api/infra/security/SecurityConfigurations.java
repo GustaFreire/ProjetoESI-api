@@ -29,7 +29,7 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                 auth.requestMatchers(HttpMethod.POST, "/auth/register").permitAll();
-                auth.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html/**").permitAll();
+                auth.requestMatchers("/h2/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html/**").permitAll();
                 auth.requestMatchers("/auth/users").hasRole("ADMIN");
                 auth.requestMatchers("/aluno/**").hasRole("DISCENTE");
                 auth.requestMatchers("/orientador/**").hasRole("DOSCENTE"); 

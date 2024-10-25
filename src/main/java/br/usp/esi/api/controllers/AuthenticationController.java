@@ -130,7 +130,7 @@ public class AuthenticationController {
             userRepository.save(user);
         }
 
-        return ResponseEntity.ok().body(new RetornoDTO("Usuário cadastrado com sucesso!"));
+        return ResponseEntity.ok().body(new RetornoDTO("Usuario cadastrado com sucesso!"));
     }
 
     @GetMapping("/users")
