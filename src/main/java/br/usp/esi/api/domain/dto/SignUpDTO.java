@@ -52,5 +52,4 @@ public record SignUpDTO(
 
     List<String> disciplinasAprovadas,
     List<String> disciplinasReprovadas) {
-
 }

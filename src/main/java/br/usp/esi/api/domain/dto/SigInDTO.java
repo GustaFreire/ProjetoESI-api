@@ -9,5 +9,4 @@ public record SigInDTO(
     
     @NotBlank(message = "Senha é obrigatória")
     String password) {
-
 }
