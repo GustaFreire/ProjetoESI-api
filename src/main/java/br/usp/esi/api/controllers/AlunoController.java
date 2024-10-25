@@ -74,7 +74,6 @@ public class AlunoController {
         }
 
         List<ListRelatoriosAlunoDTO> listaDeAlunos = new ArrayList<>();
-
         for (Relatorio relatorio: relatorios) listaDeAlunos.add(new ListRelatoriosAlunoDTO(relatorio));
         return ResponseEntity.ok(listaDeAlunos);
     }
