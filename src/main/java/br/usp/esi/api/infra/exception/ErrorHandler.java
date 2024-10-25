@@ -25,12 +25,12 @@ public class ErrorHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> tratarErroEntityNotFoundException(EntityNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(NoReportsForStudentException.class)
     public ResponseEntity<?> tratarErroNoReportsForStudentException(NoReportsForStudentException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -51,7 +51,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<?> trataErroStudentNotFound(UserNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)
