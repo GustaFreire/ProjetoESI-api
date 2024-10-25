@@ -135,7 +135,7 @@ public class AuthenticationController {
 
     @GetMapping("/users")
     @SecurityRequirement(name = "bearer-key")
-    public ResponseEntity<List<ListUsersDTO>> listar() {
+    public ResponseEntity<?> listar() {
         var users = userRepository.findAll();
         var listaDeUsuarios = new ArrayList<ListUsersDTO>();
         for (User user: users) listaDeUsuarios.add(new ListUsersDTO(user));
