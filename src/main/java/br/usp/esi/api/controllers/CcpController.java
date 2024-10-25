@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usp.esi.api.domain.dto.OrientadorCcpDetalhamentoDTO;
+import br.usp.esi.api.domain.dto.CcpOrientadorDetalhamentoDTO;
 import br.usp.esi.api.domain.dto.RelatorioCcpDTO;
 import br.usp.esi.api.domain.dto.RetornoDTO;
 import br.usp.esi.api.domain.model.Aluno;
@@ -41,7 +41,7 @@ public class CcpController {
     @GetMapping("/{id}")
     public ResponseEntity<?> detalhar(@PathVariable Long id) {
         var ccp = ccpRepository.findById(id).orElseThrow(() -> new UserNotFoundException("CCP de ID " + id + " não encontrado"));
-        return ResponseEntity.ok(new OrientadorCcpDetalhamentoDTO(ccp));
+        return ResponseEntity.ok(new CcpOrientadorDetalhamentoDTO(ccp));
     }
 
     @PostMapping("/novoRelatorio")
