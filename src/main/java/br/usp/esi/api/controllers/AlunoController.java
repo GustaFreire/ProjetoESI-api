@@ -22,6 +22,7 @@ import br.usp.esi.api.domain.repository.AlunoDisciplinasAprovadasRepository;
 import br.usp.esi.api.domain.repository.AlunoDisciplinasReprovadasRepository;
 import br.usp.esi.api.domain.repository.AlunoRepository;
 import br.usp.esi.api.domain.repository.RelatorioRepository;
+import br.usp.esi.api.infra.exception.NoReportsForStudentException;
 import br.usp.esi.api.infra.exception.UserNotFoundException;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
@@ -68,6 +69,10 @@ public class AlunoController {
         Aluno alunoLogado = alunoRepository.pegarAlunoPorIdUsuario(user.getId());
 
         List<Relatorio> relatorios = relatorioRepository.pegaRelatoriosDoAluno(alunoLogado.getId());
+        if (relatorios.size() == 0) {
+            throw new NoReportsForStudentException("O aluno não possui relatórios associados!");
+        }
+
         List<ListRelatoriosAlunoDTO> listaDeAlunos = new ArrayList<>();
 
         for (Relatorio relatorio: relatorios) listaDeAlunos.add(new ListRelatoriosAlunoDTO(relatorio));

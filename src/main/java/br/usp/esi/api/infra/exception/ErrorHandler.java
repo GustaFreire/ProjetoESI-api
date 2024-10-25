@@ -28,6 +28,11 @@ public class ErrorHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
     }
 
+    @ExceptionHandler(NoReportsForStudentException.class)
+    public ResponseEntity<?> tratarErroNoReportsForStudentException(NoReportsForStudentException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RetornoDTO("Erro: " + ex.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> tratarErro400(MethodArgumentNotValidException ex) {
         var erros = ex.getFieldErrors();
