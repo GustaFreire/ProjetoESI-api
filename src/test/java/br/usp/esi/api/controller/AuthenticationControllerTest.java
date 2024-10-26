@@ -65,7 +65,7 @@ public class AuthenticationControllerTest {
         var response = mvc.perform(
                 post("/auth/register")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(registerRequestJson.write(TestDtoFactory.criaDtoCadastroAluno())
+                    .content(registerRequestJson.write(TestDtoFactory.criaDtoCadastroDoscente())
                     .getJson())
         ).andReturn().getResponse();
 

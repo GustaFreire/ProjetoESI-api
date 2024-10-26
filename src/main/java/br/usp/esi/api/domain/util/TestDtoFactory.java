@@ -34,6 +34,28 @@ public class TestDtoFactory {
         Arrays.asList("MVGA", "Calculo II", "MD"));
     }
 
+    public static SignUpDTO criaDtoCadastroDoscente() {
+        return new SignUpDTO("arthuralves@email.com", 
+        "654321", 
+        UserRole.DOSCENTE, 
+        null, 
+        "Arthur Alves", 
+        "arthuralves@email.com", 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null, 
+        null);
+    }
+
     public static RetornoDTO criaDtoResponseCadastroAluno() {
         return new RetornoDTO("Usuario cadastrado com sucesso!");
     }
