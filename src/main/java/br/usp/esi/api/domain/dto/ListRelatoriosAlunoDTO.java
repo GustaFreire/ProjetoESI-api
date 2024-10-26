@@ -13,9 +13,10 @@ public record ListRelatoriosAlunoDTO(
     LocalDate dataLimite,
     String nomeRelatorio,
     String nomeAluno,
+    String nomeCcp,
     SituacaoRelatorio situacaoRelatorio) {
 
         public ListRelatoriosAlunoDTO(Relatorio relatorio) {
-            this(relatorio.getDataLimite(), relatorio.getNomeRelatorio(), relatorio.getAluno().getNome(), relatorio.getSituacaoRelatorio());
+            this(relatorio.getDataLimite(), relatorio.getNomeRelatorio(), relatorio.getAluno().getNome(), relatorio.getCcp().getNome(), relatorio.getSituacaoRelatorio());
         }
 }

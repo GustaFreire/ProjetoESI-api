@@ -1,20 +1,27 @@
-CREATE TABLE alunos (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id BIGINT,
-    tipo_curso VARCHAR(255), 
-    nome VARCHAR(255),
-    email VARCHAR(255),
-    nusp VARCHAR(20),
-    rg VARCHAR(20),
-    nome_orientador VARCHAR(255),
-    local_nascimento VARCHAR(255),
-    nacionalidade VARCHAR(100),
-    link_lattes VARCHAR(255),
-    data_nascimento DATE,
-    data_ultima_att_lattes DATE,
-    data_matricula DATE,
-    data_aprovacao_exame_qualificacao DATE,
-    data_aprovacao_exame_proficiencia DATE,
+CREATE TABLE IF NOT EXISTS public.alunos
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    usuario_id integer,
+    tipo_curso character varying COLLATE pg_catalog."default",
+    nome character varying COLLATE pg_catalog."default",
+    email character varying COLLATE pg_catalog."default",
+    nusp character varying COLLATE pg_catalog."default",
+    rg character varying COLLATE pg_catalog."default",
+    nome_orientador character varying COLLATE pg_catalog."default",
+    local_nascimento character varying COLLATE pg_catalog."default",
+    nacionalidade character varying COLLATE pg_catalog."default",
+    link_lattes character varying COLLATE pg_catalog."default",
+    data_nascimento date,
+    data_ultima_att_lattes date,
+    data_matricula date,
+    data_aprovacao_exame_qualificacao date,
+    data_aprovacao_exame_proficiencia date,
 
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) 
+    CONSTRAINT alunos_pkey PRIMARY KEY (id),
+    CONSTRAINT alunos_nusp_key UNIQUE (nusp),
+
+    CONSTRAINT alunos_usuario_id_fkey FOREIGN KEY (usuario_id)
+    REFERENCES public.usuarios (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
 );

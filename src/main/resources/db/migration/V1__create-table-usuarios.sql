@@ -1,10 +1,11 @@
-CREATE TABLE usuarios(
+CREATE TABLE IF NOT EXISTS public.usuarios
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    username character varying COLLATE pg_catalog."default" NOT NULL,
+    password character varying COLLATE pg_catalog."default" NOT NULL,
+    role character varying COLLATE pg_catalog."default" NOT NULL,
+    ativo BOOLEAN NOT NULL,
 
-    id BIGINT NOT NULL auto_increment,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(10) NOT NULL,
-    ativo tinyint,
-
-    primary key(id)
+    CONSTRAINT usuarios_pkey PRIMARY KEY (id),
+    CONSTRAINT usuarios_username_key UNIQUE (username)
 );

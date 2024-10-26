@@ -1,6 +1,7 @@
 package br.usp.esi.api.domain.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import br.usp.esi.api.domain.enums.ResultadoUltimaAvaliacao;
 import br.usp.esi.api.domain.enums.SituacaoRelatorio;
@@ -41,7 +42,11 @@ public class Relatorio {
     @JoinColumn(name = "orientador_id", nullable = false)
     private Orientador orientador;
 
-    private LocalDate dataLimite;//
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ccp_id", nullable = false)
+    private Ccp ccp;
+
+    private LocalDate dataLimite;
     private LocalDate prazoMaximoQualificacao;
     private LocalDate prazoMaximoDissertacao;
 
@@ -61,10 +66,16 @@ public class Relatorio {
 
     private Boolean necessitaApoioCcp;
 
-    public Relatorio(String nomeRelatorio, LocalDate dataLimite, Aluno aluno) {
+    private String parecerOrientador;
+    private LocalDateTime dataParecerOrientador;
+    private String parecerCcp;
+    private LocalDateTime dataParecerCcp;
+
+    public Relatorio(String nomeRelatorio, LocalDate dataLimite, Aluno aluno, Ccp ccp) {
         this.dataLimite = dataLimite;
         this.nomeRelatorio = nomeRelatorio;
         this.aluno = aluno;
+        this.ccp = ccp;
         this.situacaoRelatorio = SituacaoRelatorio.PENDENTE_ALUNO;
     }
 }

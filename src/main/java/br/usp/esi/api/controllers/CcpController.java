@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,9 @@ import br.usp.esi.api.domain.dto.CcpOrientadorDetalhamentoDTO;
 import br.usp.esi.api.domain.dto.RelatorioCcpDTO;
 import br.usp.esi.api.domain.dto.RetornoDTO;
 import br.usp.esi.api.domain.model.Aluno;
+import br.usp.esi.api.domain.model.Ccp;
 import br.usp.esi.api.domain.model.Relatorio;
+import br.usp.esi.api.domain.model.User;
 import br.usp.esi.api.domain.repository.AlunoRepository;
 import br.usp.esi.api.domain.repository.CcpRepository;
 import br.usp.esi.api.domain.repository.RelatorioRepository;
@@ -47,11 +50,13 @@ public class CcpController {
     @PostMapping("/novoRelatorio")
     @Transactional
     public ResponseEntity<?> criarRelatorio(@RequestBody @Valid RelatorioCcpDTO dto) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Ccp ccp = ccpRepository.pegarCcpPorIdUsuario(user.getId());
+
         List<Aluno> alunos = alunoRepository.findAll();
-        System.out.println(alunos);
 
         for (Aluno aluno: alunos) { //pra cada aluno do banco cria um relatorio especifico
-            Relatorio relatorio = new Relatorio(dto.nome(), dto.dataLimite(), aluno);
+            Relatorio relatorio = new Relatorio(dto.nome(), dto.dataLimite(), aluno, ccp);
             relatorioRepository.save(relatorio);
         }
         
