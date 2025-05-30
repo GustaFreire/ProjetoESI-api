@@ -69,5 +69,5 @@ Usuário → Navegador → URLs (urls.py) → Views (views.py) → Models (model
 
 ---
 
-## Diagrama
+## Diagrama Arquitetura de Software
 ![Diagrama Simplificado da Arquitetura de Software do Cuidando](cuidando-diagrama.png)
