@@ -70,4 +70,4 @@ Usuário → Navegador → URLs (urls.py) → Views (views.py) → Models (model
 ---
 
 ## Diagrama
-![Diagrama Simplificado da Arquitetura de Software do Cuidando](cuidando-diagrama.png "Este é o logo oficial")
+![Diagrama Simplificado da Arquitetura de Software do Cuidando](cuidando-diagrama.png)
