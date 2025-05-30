@@ -67,4 +67,7 @@ Usuário → Navegador → URLs (urls.py) → Views (views.py) → Models (model
 - O projeto faz uso de uma esteira de testes automatizados, onde os detalhes se encontram na documentação de testes
 
 
+---
 
+## Diagrama
+![Diagrama Simplificado da Arquitetura de Software do Cuidando](cuidando-diagrama.png "Este é o logo oficial")
